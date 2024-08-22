@@ -36,7 +36,7 @@ You may list what libraries you used in this project, example :
 * `services`
 
 ## <a name="website-link"></a> Website URL :
-- [FRONT END](https://front-end-storyku-saidhr-7nt6ikmrd-cielhaidirs-projects.vercel.app/stories)
+- [FRONT END](https://front-end-storyku-saidhr-cielhaidirs-projects.vercel.app/)
 - [BACK END](https://back-end-storyku.vercel.app/)
 
 ## <a name="project-link"></a> Project URL :
