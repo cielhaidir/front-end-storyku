@@ -18,6 +18,7 @@ function EditStory() {
   const [chapters, setChapters] = useState([]);
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     apiClient.get(`/stories/${id}`)
       .then(response => {
@@ -30,7 +31,7 @@ function EditStory() {
         setStatus(status);
         setChapters(chapters || []);
         if (story_cover) {
-          setCoverImage(`http://localhost:3000/uploads/${story_cover}`);
+          setCoverImage(`${process.env.REACT_BACK_END}/uploads/${story_cover}`);
         }
       })
       .catch(error => console.error(error));
