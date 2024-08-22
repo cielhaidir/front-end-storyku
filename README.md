@@ -25,6 +25,7 @@ The goal of this project is to develop a full-stack web application for BIGIO us
 You may list what libraries you used in this project, example :
 - ExpressJS
 - ReactJS
+- Supabase
 
 
 ## <a name="project-structures"></a> Project Structure :
