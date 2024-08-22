@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import apiClient from '../../config/apiClient';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../Breadcrumb';
 import ReactQuill from 'react-quill';
@@ -20,7 +20,7 @@ function AddChapter() {
             return;
         }
 
-        axios.post(`http://localhost:3000/api/stories/${storyId}/chapters`, {
+        apiClient.post(`/stories/${storyId}/chapters`, {
             title,
             content
         })

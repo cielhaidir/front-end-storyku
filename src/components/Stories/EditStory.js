@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumb from '../Breadcrumb';
 import Swal from 'sweetalert2'
+import apiClient from '../../config/apiClient';
 
 function EditStory() {
   const { id } = useParams();
@@ -19,7 +19,7 @@ function EditStory() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/stories/${id}`)
+    apiClient.get(`/stories/${id}`)
       .then(response => {
         const { title, author, synopsis, category, tags, status, chapter, story_cover } = response.data;
         setTitle(title);
@@ -36,7 +36,7 @@ function EditStory() {
       .catch(error => console.error(error));
 
       
-    axios.get('http://localhost:3000/api/categories')
+    apiClient.get('/categories')
       .then(response => {
         setCategories(response.data);
       })
@@ -66,7 +66,7 @@ function EditStory() {
     if (coverImage) {
       formData.append('storyCover', coverImage);
     }
-    axios.put(`http://localhost:3000/api/stories/${id}`, formData)
+    apiClient.put(`/stories/${id}`, formData)
       .then(() => {
         navigate('/stories');
       })
@@ -124,7 +124,7 @@ function EditStory() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/api/chapters/${chapterId}`)
+        apiClient.delete(`/chapters/${chapterId}`)
           .then(() => {
             setChapters(chapters.filter(chapter => chapter.id !== chapterId));
             Swal.fire(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../../config/apiClient';
 import { useNavigate, useParams, useLocation  } from 'react-router-dom';
 import Breadcrumb from '../Breadcrumb';
 import ReactQuill from 'react-quill';
@@ -14,7 +14,7 @@ function DetailChapter() {
 
     useEffect(() => {
         if (storyId && chapterId) {
-            axios.get(`http://localhost:3000/api/chapters/${chapterId}`)
+            apiClient.get(`/chapters/${chapterId}`)
                 .then(response => {
                     const { title, content } = response.data;
                     setTitle(title);

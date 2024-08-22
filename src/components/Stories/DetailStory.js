@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumb from '../Breadcrumb';
+import apiClient from '../../config/apiClient';
 
 function DetailStory() {
     const { id } = useParams();
@@ -17,7 +17,7 @@ function DetailStory() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/stories/${id}`)
+        apiClient.get(`/stories/${id}`)
             .then(response => {
                 const { title, author, synopsis, category, tags, status, story_cover, chapters } = response.data;
                 setTitle(title);
@@ -33,7 +33,7 @@ function DetailStory() {
             })
             .catch(error => console.error(error));
 
-        axios.get('http://localhost:3000/api/categories')
+        apiClient.get('/categories')
             .then(response => {
                 setCategories(response.data);
             })

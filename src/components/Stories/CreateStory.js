@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../Breadcrumb';
 import Swal from 'sweetalert2'
+import apiClient from '../../config/apiClient';
 
 function CreateStory() {
     const [title, setTitle] = useState('');
@@ -17,7 +17,7 @@ function CreateStory() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/categories')
+        apiClient.get('/categories')
             .then(response => setCategories(response.data))
             .catch(error => console.error(error));
     }, []);
@@ -60,7 +60,7 @@ function CreateStory() {
         formData.append('status', status);
         if (cover) formData.append('storyCover', cover);
 
-        axios.post('http://localhost:3000/api/stories', formData)
+        apiClient.post('/stories', formData)
             .then(response => {
                 localStorage.setItem('newStoryId', response.data.id);
                 navigate('/stories/add-chapter');

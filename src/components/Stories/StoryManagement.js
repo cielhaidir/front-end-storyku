@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import apiClient from '../../config/apiClient';
 import { Link } from 'react-router-dom';
 import { GrFilter } from "react-icons/gr";
 import { FaSearch, FaEye } from "react-icons/fa";
@@ -18,7 +18,7 @@ function StoryManagement() {
   const [itemsPerPage] = useState(5);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/stories')
+    apiClient.get('/stories')
       .then(response => {
         setStories(response.data);
         const uniqueCategories = [...new Set(response.data.map(story => story.category))];
@@ -28,7 +28,7 @@ function StoryManagement() {
   }, []);
 
   const deleteStory = (id) => {
-    axios.delete(`http://localhost:3000/api/stories/${id}`)
+    apiClient.delete(`/stories/${id}`)
       .then(() => {
         setStories(stories.filter(story => story.id !== id));
       })
@@ -70,9 +70,9 @@ function StoryManagement() {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/api/stories/${storyId}`)
+        apiClient.delete(`/stories/${storyId}`)
           .then(() => {
-            axios.get('http://localhost:3000/api/stories')
+            apiClient.get('/stories')
             .then(response => setStories(response.data));
             Swal.fire(
               'Deleted!',
